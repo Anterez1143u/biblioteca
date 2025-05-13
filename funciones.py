@@ -82,7 +82,9 @@ def actualizar_libro(libro_id, titulo=None, genero=None, año=None):
         print("Libro no encontrado.")
     session.close()
 
-def eliminar_libro(libro_id):
+def eliminar_libro(libro_id, usuario_rol):
+    if not verificar_permiso(usuario_rol, 'bibliotecario'):
+        return
     session = get_session()
     libro = session.query(Libro).get(libro_id)
     if libro:
@@ -95,13 +97,13 @@ def eliminar_libro(libro_id):
 # ---------------------------
 # CRUD: USUARIO
 # ---------------------------
-def crear_usuario(nombre, email, telefono):
+def crear_usuario(nombre, email, telefono, rol='lector'):
     session = get_session()
-    usuario = Usuario(nombre=nombre, email=email, telefono=telefono)
+    usuario = Usuario(nombre=nombre, email=email, telefono=telefono, rol=rol)
     session.add(usuario)
     session.commit()
     session.close()
-    print("Usuario creado.")
+    print(f"Usuario '{nombre}' creado con rol '{rol}'.")
 
 def listar_usuarios():
     session = get_session()
@@ -124,7 +126,9 @@ def actualizar_usuario(usuario_id, nombre=None, email=None, telefono=None):
     else:
         print("Usuario no encontrado.")
     session.close()
-def eliminar_usuario(usuario_id):
+def eliminar_usuario(usuario_id, usuario_rol):
+    if not verificar_permiso(usuario_rol, 'bibliotecario'):
+        return
     session = get_session()
     usuario = session.query(Usuario).get(usuario_id)
     if usuario:
@@ -247,14 +251,6 @@ def listar_prestamos_activos():
         print(f"{p.id}: Libro: {p.libro.titulo}, Usuario: {p.usuario.nombre}, Devuelve: {p.fecha_devolucion}")
     session.close()
 
-def crear_usuario(nombre, email, telefono, rol='lector'):
-    session = get_session()
-    usuario = Usuario(nombre=nombre, email=email, telefono=telefono, rol=rol)
-    session.add(usuario)
-    session.commit()
-    session.close()
-    print(f"Usuario '{nombre}' creado con rol '{rol}'.")
-
 def login_usuario(email):
     session = get_session()
     usuario = session.query(Usuario).filter_by(email=email).first()
@@ -264,3 +260,37 @@ def login_usuario(email):
     else:
         print("Usuario no encontrado.")
         return None
+
+# ---------------------------
+# ROLES Y PERMISOS
+# ---------------------------
+def verificar_permiso(usuario_rol, permiso_requerido):
+    if usuario_rol != permiso_requerido:
+        print(f"Acción no permitida. Se requiere el rol '{permiso_requerido}'.")
+        return False
+    return True
+
+# ---------------------------
+# HISTORIAL DE PRÉSTAMOS
+# ---------------------------
+def historial_prestamos_usuario(usuario_id):
+    session = get_session()
+    prestamos = session.query(Prestamo).filter(Prestamo.usuario_id == usuario_id).all()
+    if prestamos:
+        print(f"Historial de préstamos del usuario ID {usuario_id}:")
+        for p in prestamos:
+            print(f"- Libro: {p.libro.titulo}, Fecha Préstamo: {p.fecha_prestamo}, Devuelto: {'Sí' if p.devuelto else 'No'}")
+    else:
+        print("No hay préstamos registrados para este usuario.")
+    session.close()
+
+def historial_prestamos_libro(libro_id):
+    session = get_session()
+    prestamos = session.query(Prestamo).filter(Prestamo.libro_id == libro_id).all()
+    if prestamos:
+        print(f"Historial de préstamos del libro ID {libro_id}:")
+        for p in prestamos:
+            print(f"- Usuario: {p.usuario.nombre}, Fecha Préstamo: {p.fecha_prestamo}, Devuelto: {'Sí' if p.devuelto else 'No'}")
+    else:
+        print("No hay préstamos registrados para este libro.")
+    session.close()
