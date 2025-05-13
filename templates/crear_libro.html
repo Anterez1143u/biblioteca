@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block contenido %}
+<h2>Agregar Libro</h2>
+<form method="post">
+    Título: <input type="text" name="titulo"><br>
+    Género: <input type="text" name="genero"><br>
+    Año: <input type="number" name="anio_publicacion"><br>
+    Autor:
+    <select name="autor_id">
+        {% for autor in autores %}
+        <option value="{{ autor.id }}">{{ autor.nombre }}</option>
+        {% endfor %}
+    </select><br>
+    <input type="submit" value="Guardar">
+</form>
+{% endblock %}

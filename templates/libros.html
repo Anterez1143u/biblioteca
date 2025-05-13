@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block contenido %}
+<h2>Listado de Libros</h2>
+<a href="{{ url_for('crear_libro') }}">➕ Agregar Libro</a>
+<ul>
+  {% for libro in libros %}
+    <li>
+      {{ libro.titulo }} - {{ libro.genero }} ({{ libro.anio_publicacion }}) - Autor: {{ libro.autor.nombre }}
+      <a href="{{ url_for('editar_libro', libro_id=libro.id) }}">✏️</a>
+      <a href="{{ url_for('eliminar_libro', libro_id=libro.id) }}">🗑️</a>
+    </li>
+  {% endfor %}
+</ul>
+{% endblock %}

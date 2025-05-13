@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block contenido %}
+<h2>Agregar Usuario</h2>
+<form method="post">
+    Nombre: <input type="text" name="nombre"><br>
+    Email: <input type="email" name="email"><br>
+    Teléfono: <input type="text" name="telefono"><br>
+    Rol:
+    <select name="rol">
+        <option value="lector">Lector</option>
+        <option value="bibliotecario">Bibliotecario</option>
+    </select><br>
+    <input type="submit" value="Guardar">
+</form>
+{% endblock %}

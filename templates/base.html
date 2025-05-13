@@ -1,0 +1,20 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Biblioteca Virtual</title>
+</head>
+<body>
+    <h1>📚 Biblioteca Virtual</h1>
+    <nav>
+        <a href="{{ url_for('listar_libros') }}">Libros</a> |
+        <a href="{{ url_for('listar_autores') }}">Autores</a> |
+        <a href="{{ url_for('listar_usuarios') }}">Usuarios</a> |
+        <a href="{{ url_for('listar_prestamos') }}">Préstamos</a> |
+        <a href="{{ url_for('usuarios_con_prestamos_vencidos') }}">Préstamos vencidos</a> |
+        <a href="{{ url_for('autor_mas_libros') }}">Autor con más libros</a>
+    </nav>
+    <hr>
+    {% block contenido %}{% endblock %}
+</body>
+</html>

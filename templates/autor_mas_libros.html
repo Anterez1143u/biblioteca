@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+{% block contenido %}
+<h2>Autor con más libros</h2>
+{% if autor %}
+<p>{{ autor.nombre }} ({{ autor.total_libros }} libros)</p>
+{% else %}
+<p>No hay datos suficientes.</p>
+{% endif %}
+{% endblock %}

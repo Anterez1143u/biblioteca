@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block contenido %}
+<h2>Editar Usuario</h2>
+<form method="post">
+    Nombre: <input type="text" name="nombre" value="{{ usuario.nombre }}"   ><br>
+    Email: <input type="email" name="email" value="{{ usuario.email }}"><br>
+    Teléfono: <input type="text" name="telefono" value="{{ usuario.telefono }}   ><br>
+    Rol:
+    <select name="rol">
+        <option value="lector">Lector</option>
+        <option value="bibliotecario">Bibliotecario</option>
+    </select><br>
+    <input type="submit" value="Guardar">
+</form>
+{% endblock %}

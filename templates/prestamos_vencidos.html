@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% block contenido %}
+<h2>Usuarios con préstamos vencidos</h2>
+{% if vencidos %}
+<ul>
+  {% for usuario, email, fecha in vencidos %}
+    <li>{{ usuario }} ({{ email }}) - Debía devolver: {{ fecha }}</li>
+  {% endfor %}
+</ul>
+{% else %}
+<p>No hay préstamos vencidos.</p>
+{% endif %}
+{% endblock %}

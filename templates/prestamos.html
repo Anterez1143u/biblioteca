@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% block contenido %}
+<h2>Listado de Préstamos</h2>
+<a href="{{ url_for('crear_prestamo') }}">➕ Registrar Préstamo</a>
+<ul>
+  {% for prestamo in prestamos %}
+    <li>
+      Libro: {{ prestamo.libro.titulo }} |
+      Usuario: {{ prestamo.usuario.nombre }} |
+      Prestado: {{ prestamo.fecha_prestamo }} |
+      Devuelve: {{ prestamo.fecha_devolucion }}
+      {% if prestamo.devuelto %}
+        ✅ Devuelto
+      {% else %}
+        <a href="{{ url_for('marcar_devueltos', prestamo_id=prestamo.id) }}">📦 Marcar como devuelto</a>
+      {% endif %}
+    </li>
+  {% endfor %}
+</ul>
+{% endblock %}

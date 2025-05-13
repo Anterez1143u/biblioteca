@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block contenido %}
+<h2>Usuarios</h2>
+<a href="{{ url_for('crear_usuario') }}">➕ Agregar Usuario</a>
+<ul>
+  {% for usuario in usuarios %}
+    <li>
+      {{ usuario.nombre }} - {{ usuario.email }} - {{ usuario.telefono }} (Rol: {{ usuario.rol }})
+      <a href="{{ url_for('editar_usuario', usuario_id=usuario.id) }}">✏️</a>
+      <a href="{{ url_for('eliminar_usuario', usuario_id=usuario.id) }}">🗑️</a>
+    </li>
+  {% endfor %}
+</ul>
+{% endblock %}
