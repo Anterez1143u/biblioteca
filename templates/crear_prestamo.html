@@ -1,21 +1,42 @@
 {% extends 'base.html' %}
 {% block contenido %}
-<h2>Registrar Préstamo</h2>
-<form method="post">
-    Libro:
-    <select name="libro_id">
-        {% for libro in libros %}
-        <option value="{{ libro.id }}">{{ libro.titulo }}</option>
-        {% endfor %}
-    </select><br>
-    Usuario:
-    <select name="usuario_id">
-        {% for usuario in usuarios %}
-        <option value="{{ usuario.id }}">{{ usuario.nombre }}</option>
-        {% endfor %}
-    </select><br>
-    Fecha préstamo: <input type="date" name="fecha_prestamo"><br>
-    Fecha devolución: <input type="date" name="fecha_devolucion"><br>
-    <input type="submit" value="Registrar">
-</form>
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        <div class="card shadow-sm mt-4">
+            <div class="card-header" style="background: #4b3f72; color: #fff;">
+                <h3 class="mb-0">Registrar Préstamo</h3>
+            </div>
+            <div class="card-body">
+                <form method="post">
+                    <div class="mb-3">
+                        <label for="libro_id" class="form-label">Libro</label>
+                        <select class="form-select" id="libro_id" name="libro_id" required>
+                            {% for libro in libros %}
+                            <option value="{{ libro.id }}">{{ libro.titulo }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="usuario_id" class="form-label">Usuario</label>
+                        <select class="form-select" id="usuario_id" name="usuario_id" required>
+                            {% for usuario in usuarios %}
+                            <option value="{{ usuario.id }}">{{ usuario.nombre }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="fecha_prestamo" class="form-label">Fecha préstamo</label>
+                        <input type="date" class="form-control" id="fecha_prestamo" name="fecha_prestamo" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="fecha_devolucion" class="form-label">Fecha devolución</label>
+                        <input type="date" class="form-control" id="fecha_devolucion" name="fecha_devolucion">
+                    </div>
+                    <button type="submit" class="btn" style="background: #4b3f72; color: #fff;">Registrar</button>
+                    <a href="{{ url_for('listar_prestamos') }}" class="btn btn-secondary ms-2">Cancelar</a>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock %}

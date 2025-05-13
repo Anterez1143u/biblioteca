@@ -1,14 +1,42 @@
 {% extends 'base.html' %}
 {% block contenido %}
-<h2>Usuarios</h2>
-<a href="{{ url_for('crear_usuario') }}">➕ Agregar Usuario</a>
-<ul>
-  {% for usuario in usuarios %}
-    <li>
-      {{ usuario.nombre }} - {{ usuario.email }} - {{ usuario.telefono }} (Rol: {{ usuario.rol }})
-      <a href="{{ url_for('editar_usuario', usuario_id=usuario.id) }}">✏️</a>
-      <a href="{{ url_for('eliminar_usuario', usuario_id=usuario.id) }}">🗑️</a>
-    </li>
-  {% endfor %}
-</ul>
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h2 class="mb-0">Usuarios</h2>
+    <a href="{{ url_for('crear_usuario') }}" class="btn btn-success">
+        ➕ Agregar Usuario
+    </a>
+</div>
+<div class="card shadow-sm">
+    <div class="card-body p-0">
+        <table class="table table-hover mb-0">
+            <thead class="table-light">
+                <tr>
+                    <th>Nombre</th>
+                    <th>Email</th>
+                    <th>Teléfono</th>
+                    <th>Rol</th>
+                    <th class="text-end">Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for usuario in usuarios %}
+                <tr>
+                    <td>{{ usuario.nombre }}</td>
+                    <td>{{ usuario.email }}</td>
+                    <td>{{ usuario.telefono }}</td>
+                    <td>{{ usuario.rol }}</td>
+                    <td class="text-end">
+                        <a href="{{ url_for('editar_usuario', usuario_id=usuario.id) }}" class="btn btn-sm btn-primary" title="Editar">
+                            ✏️
+                        </a>
+                        <a href="{{ url_for('eliminar_usuario', usuario_id=usuario.id) }}" class="btn btn-sm btn-danger" title="Eliminar">
+                            🗑️
+                        </a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
 {% endblock %}

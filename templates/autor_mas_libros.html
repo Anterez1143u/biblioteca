@@ -1,9 +1,22 @@
 {% extends 'base.html' %}
 {% block contenido %}
-<h2>Autor con más libros</h2>
-{% if autor %}
-<p>{{ autor.nombre }} ({{ autor.total_libros }} libros)</p>
-{% else %}
-<p>No hay datos suficientes.</p>
-{% endif %}
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        <div class="card mt-4 shadow-sm">
+            <div class="card-header" style="background: #4b3f72; color: #fff;">
+                <h2 class="mb-0">Autor con más libros</h2>
+            </div>
+            <div class="card-body">
+                {% if autor %}
+                    <p class="fs-5">
+                        <span class="fw-bold">{{ autor.nombre }}</span>
+                        <span class="badge bg-success ms-2">{{ autor.total_libros }} libros</span>
+                    </p>
+                {% else %}
+                    <p class="text-muted">No hay datos suficientes.</p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock %}

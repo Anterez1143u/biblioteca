@@ -1,15 +1,37 @@
 {% extends 'base.html' %}
 {% block contenido %}
-<h2>Editar Usuario</h2>
-<form method="post">
-    Nombre: <input type="text" name="nombre" value="{{ usuario.nombre }}"   ><br>
-    Email: <input type="email" name="email" value="{{ usuario.email }}"><br>
-    Teléfono: <input type="text" name="telefono" value="{{ usuario.telefono }}   ><br>
-    Rol:
-    <select name="rol">
-        <option value="lector">Lector</option>
-        <option value="bibliotecario">Bibliotecario</option>
-    </select><br>
-    <input type="submit" value="Guardar">
-</form>
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        <div class="card shadow-sm mt-4">
+            <div class="card-header" style="background: #4b3f72; color: #fff;">
+                <h3 class="mb-0">Editar Usuario</h3>
+            </div>
+            <div class="card-body">
+                <form method="post">
+                    <div class="mb-3">
+                        <label for="nombre" class="form-label">Nombre</label>
+                        <input type="text" class="form-control" id="nombre" name="nombre" value="{{ usuario.nombre }}" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="email" class="form-label">Email</label>
+                        <input type="email" class="form-control" id="email" name="email" value="{{ usuario.email }}" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="telefono" class="form-label">Teléfono</label>
+                        <input type="text" class="form-control" id="telefono" name="telefono" value="{{ usuario.telefono }}">
+                    </div>
+                    <div class="mb-3">
+                        <label for="rol" class="form-label">Rol</label>
+                        <select class="form-select" id="rol" name="rol" required>
+                            <option value="lector" {% if usuario.rol == 'lector' %}selected{% endif %}>Lector</option>
+                            <option value="bibliotecario" {% if usuario.rol == 'bibliotecario' %}selected{% endif %}>Bibliotecario</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn" style="background: #4b3f72; color: #fff;">Guardar</button>
+                    <a href="{{ url_for('listar_usuarios') }}" class="btn btn-secondary ms-2">Cancelar</a>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock %}

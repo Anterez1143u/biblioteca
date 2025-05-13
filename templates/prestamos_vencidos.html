@@ -1,13 +1,30 @@
 {% extends 'base.html' %}
 {% block contenido %}
-<h2>Usuarios con préstamos vencidos</h2>
-{% if vencidos %}
-<ul>
-  {% for usuario, email, fecha in vencidos %}
-    <li>{{ usuario }} ({{ email }}) - Debía devolver: {{ fecha }}</li>
-  {% endfor %}
-</ul>
-{% else %}
-<p>No hay préstamos vencidos.</p>
-{% endif %}
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <div class="card shadow-sm mt-4">
+            <div class="card-header" style="background: #4b3f72; color: #fff;">
+                <h3 class="mb-0">Usuarios con préstamos vencidos</h3>
+            </div>
+            <div class="card-body">
+                {% if vencidos %}
+                <ul class="list-group">
+                  {% for usuario, email, fecha in vencidos %}
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        <span>
+                            <strong>{{ usuario }}</strong> ({{ email }})
+                        </span>
+                        <span class="badge bg-danger">
+                            Debía devolver: {{ fecha }}
+                        </span>
+                    </li>
+                  {% endfor %}
+                </ul>
+                {% else %}
+                <p class="text-muted mb-0">No hay préstamos vencidos.</p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock %}

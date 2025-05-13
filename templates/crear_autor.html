@@ -1,9 +1,26 @@
 {% extends 'base.html' %}
 {% block contenido %}
-<h2>Agregar Autor</h2>
-<form method="post">
-    Nombre: <input type="text" name="nombre"><br>
-    Nacionalidad: <input type="text" name="nacionalidad"><br>
-    <input type="submit" value="Guardar">
-</form>
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        <div class="card shadow-sm mt-4">
+            <div class="card-header" style="background: #4b3f72; color: #fff;">
+                <h3 class="mb-0">Agregar Autor</h3>
+            </div>
+            <div class="card-body">
+                <form method="post">
+                    <div class="mb-3">
+                        <label for="nombre" class="form-label">Nombre</label>
+                        <input type="text" class="form-control" id="nombre" name="nombre" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="nacionalidad" class="form-label">Nacionalidad</label>
+                        <input type="text" class="form-control" id="nacionalidad" name="nacionalidad">
+                    </div>
+                    <button type="submit" class="btn" style="background: #4b3f72; color: #fff;">Guardar</button>
+                    <a href="{{ url_for('listar_autores') }}" class="btn btn-secondary ms-2">Cancelar</a>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock %}
